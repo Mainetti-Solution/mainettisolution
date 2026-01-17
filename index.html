@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Mainetti Solution | Manutenzione Stabili & Riparazioni Ticino</title>
+  <meta name="description" content="Mainetti Solution Ticino: interventi di manutenzione stabili, riparazioni elettriche, tetti e risoluzione guasti. Il braccio operativo di Mainetti Vision." />
+
+  <link rel="icon" href="icon.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Mantengo lo stesso sfondo scuro per brand identity */
+      --bg: #0b1220;
+      --card: rgba(255,255,255,0.06);
+      --card-hover: rgba(255,255,255,0.09);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --line: rgba(255,255,255,0.12);
+      
+      /* NUOVI COLORI: Arancione (Sicurezza/Cantiere) e Giallo */
+      --accent: #f59e0b; /* Amber 500 */
+      --accent-glow: rgba(245, 158, 11, 0.4);
+      --accent2: #fcd34d; /* Amber 300 */
+      
+      --shadow: 0 18px 60px rgba(0,0,0,0.45);
+      --radius: 20px;
+      --max: 1120px;
+      --font: 'Outfit', system-ui, -apple-system, sans-serif;
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height: 100%; }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body{
+      margin: 0;
+      font-family: var(--font);
+      background:
+        /* Gradienti adattati ai toni caldi */
+        radial-gradient(900px 500px at 10% 10%, rgba(245, 158, 11,0.15), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(252, 211, 77,0.12), transparent 60%),
+        radial-gradient(900px 500px at 70% 90%, rgba(245, 158, 11,0.08), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a{ color: inherit; text-decoration: none; transition: 0.2s; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 24px; }
+
+    /* Animazioni Scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header */
+    header{
+      position: sticky; top: 0;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11,18,32,0.75);
+      border-bottom: 1px solid var(--line);
+      z-index: 100;
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 14px; padding-top: 16px; padding-bottom: 16px;
+    }
+    .brand{ display:flex; align-items:center; gap: 12px; min-width: 240px; }
+    .logo{
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      display:flex; align-items:center; justify-content:center;
+      border: 1px solid rgba(255,255,255,0.10);
+      overflow: hidden;
+    }
+    .logo img{ width: 100%; height: 100%; object-fit: cover; }
+    .brand h1{ margin: 0; font-size: 16px; font-weight: 700; text-transform: uppercase; }
+    .brand small{ color: var(--muted); display:block; font-size: 12px; font-weight: 400; }
+
+    .menu{ display:flex; gap: 8px; align-items:center; flex-wrap: wrap; justify-content: flex-end; }
+    .menu a{
+      font-size: 14px; color: var(--muted); font-weight: 500;
+      padding: 8px 12px; border-radius: 10px;
+    }
+    .menu a:hover{ background: rgba(255,255,255,0.06); color: var(--text); }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px; padding: 12px 20px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06); color: var(--text);
+      font-weight: 600; font-size: 14px; cursor: pointer; transition: all .2s ease;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25);
+    }
+    .btn.primary{
+      border-color: rgba(245, 158, 11, 0.4);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.20), rgba(252, 211, 77, 0.10));
+      color: #fff;
+    }
+    .btn.primary:hover{
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.30), rgba(252, 211, 77, 0.15));
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 60px 0 40px;
+      display:grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;
+    }
+    .kicker{
+      display:inline-flex; gap: 10px; align-items:center;
+      padding: 6px 12px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05); color: var(--accent);
+      font-size: 12px; font-weight: 600; margin-bottom: 20px;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 99px; background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+    .hero h2{ margin: 0 0 16px; font-size: clamp(32px, 5vw, 52px); line-height: 1.05; font-weight: 700; letter-spacing: -1px; }
+    .hero p{ margin: 0; color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 55ch; font-weight: 300; }
+    .heroActions{ margin-top: 24px; display:flex; gap: 12px; flex-wrap: wrap; align-items:center; }
+    
+    .stats{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .card{
+      background: var(--card); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s ease;
+    }
+    .card:hover{ border-color: rgba(255,255,255,0.15); }
+    .stat{ padding: 18px; }
+    .stat b{ display:block; font-size: 18px; color: #fff; margin-bottom: 4px; }
+    .stat span{ display:block; color: var(--muted); font-size: 13px; line-height: 1.4; }
+
+    section{ padding: 40px 0; }
+    .titleRow{ display:flex; align-items:flex-end; justify-content:space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+    h3{ margin: 0; font-size: 26px; letter-spacing: -0.5px; color: #fff; }
+    .sub{ margin: 6px 0 0; color: var(--muted); font-size: 15px; max-width: 600px; }
+
+    /* Features */
+    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature{
+      padding: 20px; background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius);
+      transition: background 0.2s;
+    }
+    .feature:hover{ background: var(--card-hover); }
+    .feature .ic{
+      width: 48px; height: 48px; border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);
+      margin-bottom: 16px; font-size: 20px;
+    }
+    .feature b{ display:block; margin-bottom: 8px; font-size: 18px; }
+    .feature p{ margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    /* SEZIONE ECOSYSTEM (NUOVA) */
+    .ecosystem-box {
+        background: linear-gradient(to right, rgba(255,255,255,0.03) 50%, rgba(31,209,138,0.05) 50%);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius);
+        padding: 0;
+        display: grid; grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+    }
+    .eco-part { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+    .eco-part h4 { margin: 0 0 10px; font-size: 20px; }
+    .eco-part p { margin: 0 0 20px; color: var(--muted); font-size: 14px; }
+    .eco-divider {
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; background: #0b1220; border-radius: 50%;
+        position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+        border: 1px solid rgba(255,255,255,0.2); z-index: 10;
+    }
+
+    /* Pricing */
+    .pricing{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+    .priceCard{
+      padding: 24px; border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03);
+      display:flex; flex-direction: column; gap: 12px; transition: transform 0.2s;
+    }
+    .priceCard:hover{ transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
+    .priceCard.recommended{
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(252, 211, 77, 0.05));
+      border-color: rgba(245, 158, 11, 0.3); box-shadow: 0 10px 40px rgba(245, 158, 11, 0.08);
+      position: relative;
+    }
+    .badge{
+      align-self:flex-start; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 6px 10px; border-radius: 999px;
+      border: 1px solid rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.15);
+      color: var(--accent); font-weight: 700; margin-bottom: 4px;
+    }
+    .priceTop{ display:flex; align-items:flex-end; justify-content:space-between; gap: 10px; }
+    .priceTop b{ font-size: 18px; }
+    .price{ font-size: 20px; font-weight: 700; color: var(--text); }
+    ul{ margin: 8px 0; padding-left: 20px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    ul li { margin-bottom: 6px; }
+    .spacer{ flex: 1; }
+    .mini{ font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; line-height: 1.5; }
+
+    /* Process */
+    .steps{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .step{ padding: 18px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.08); background: var(--card); }
+    .num{
+      width: 36px; height: 36px; border-radius: 10px;
+      display:flex; align-items:center; justify-content:center;
+      border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
+      margin-bottom: 12px; font-weight: 800; font-size: 14px;
+    }
+
+    /* FAQ */
+    .faq{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    details{
+      background: var(--card); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 16px; transition: background 0.2s;
+    }
+    details[open] { background: rgba(255,255,255,0.08); }
+    summary{ cursor: pointer; font-weight: 600; font-size: 15px; outline: none; }
+    details p{ margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    /* Footer */
+    footer{ border-top: 1px solid var(--line); padding: 40px 0; color: var(--muted); font-size: 13px; }
+    .footgrid{ display:grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
+    .footlinks{ display:flex; gap: 10px; flex-wrap: wrap; justify-content:flex-end; }
+    .footlinks a{ 
+      padding: 8px 12px; border-radius: 10px; 
+      border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); 
+    }
+    .footlinks a:hover{ background: rgba(255,255,255,0.08); color: #fff; }
+
+    /* Form */
+    input, select, textarea {
+      width:100%; padding:14px 14px; border-radius:14px;
+      border:1px solid rgba(255,255,255,0.14); background:rgba(255,255,255,0.04);
+      color:var(--text); outline:none; font-family: var(--font); font-size: 14px; transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); background: rgba(255,255,255,0.07); }
+    label { display:block; font-size:12px; color:var(--muted); margin: 12px 0 6px; font-weight: 500; }
+
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; text-align:center; padding-top: 40px; }
+      .heroActions { justify-content: center; }
+      .kicker { margin: 0 auto 20px; }
+      .stats{ grid-template-columns: 1fr 1fr; text-align: left; }
+      .grid3, .pricing, .steps, .faq, .footgrid, .ecosystem-box { grid-template-columns: 1fr; }
+      .ecosystem-box { background: linear-gradient(to bottom, rgba(255,255,255,0.03) 50%, rgba(31,209,138,0.05) 50%); }
+      .footlinks{ justify-content:flex-start; margin-top: 10px; }
+      .brand{ min-width: unset; }
+      .menu { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo"><img src="icon.png" alt="Logo Mainetti Solution"></div>
+        <div>
+          <h1>MAINETTI SOLUTION</h1>
+          <small>Ticino Manutenzione & Guasti</small>
+        </div>
+      </div>
+      <nav class="menu">
+        <a href="#servizi">Interventi</a>
+        <a href="#ecosystem">Partner</a>
+        <a href="#tariffe">Tariffe</a>
+        <a href="#processo">Come Operiamo</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn primary" href="#contatto">Richiedi Intervento</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero reveal active" id="top">
+      <div>
+        <div class="kicker"><span class="dot"></span> Interventi rapidi. Zero sorprese.</div>
+        <h2>Risolviamo guasti e manutenzioni in tutto il Ticino.</h2>
+        <p>Il braccio operativo per la tua casa o azienda. Dalle piccole riparazioni elettriche alla manutenzione tetti post-ispezione. Affidabilità firmata <b>Mainetti</b>.</p>
+        <div class="heroActions">
+          <a class="btn primary" href="#contatto">🛠️ Richiedi un tecnico</a>
+          <a class="btn" href="#servizi">Scopri i servizi</a>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="card stat"><b>Pronto Intervento</b><span>Risposta rapida per guasti urgenti.</span></div>
+        <div class="card stat"><b>Riparazioni Tetti</b><span>Interventi mirati su lattoneria e tegole.</span></div>
+        <div class="card stat"><b>Elettricità</b><span>Manutenzione impianti e ricerca guasti.</span></div>
+        <div class="card stat"><b>Concretezza</b><span>Operiamo dove serve, quando serve.</span></div>
+      </div>
+    </section>
+
+    <section id="ecosystem" class="reveal">
+      <div class="titleRow">
+        <div>
+          <h3>Diagnosi e Cura</h3>
+          <p class="sub">Un ecosistema unico per la cura del tuo immobile.</p>
+        </div>
+      </div>
+      <div style="position:relative;">
+          <div class="ecosystem-box">
+            <div class="eco-part">
+                <span style="font-size:30px; margin-bottom:10px;">🛠️</span>
+                <h4>Mainetti Solution</h4>
+                <p>Noi eseguiamo il lavoro manuale. Ripariamo, sostituiamo, installiamo.</p>
+                <div style="font-weight:700; color:#fff;">SEI QUI</div>
+            </div>
+            <div class="eco-part" style="text-align:right; align-items:flex-end;">
+                <span style="font-size:30px; margin-bottom:10px;">🚁</span>
+                <h4>Mainetti Vision</h4>
+                <p>Loro analizzano il problema dall'alto con termografia e droni.</p>
+                <a href="www.minettivision.ch" style="color: #1fd18a; text-decoration:underline; font-size:14px; font-weight:600;">Vai alle ispezioni &rarr;</a>
+            </div>
+          </div>
+          <div class="eco-divider">⇄</div>
+      </div>
+    </section>
+
+    <section id="servizi" class="reveal">
+      <div class="titleRow">
+        <div>
+          <h3>I nostri servizi</h3>
+          <p class="sub">Interventi a Cresciano e in tutto il Cantone.</p>
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="feature">
+          <div class="ic">⚡</div><b>Guasti Elettrici</b>
+          <p>Ricerca guasti, sostituzione componenti usurati, piccole installazioni e manutenzione impianto.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">🏠</div><b>Tetti & Lattoneria</b>
+          <p>Intervento fisico dopo l'ispezione: sostituzione tegole, pulizia canali, riparazione infiltrazioni.</p>
+        </div>
+        <div class="feature">
+          <div class="ic">🔧</div><b>Manutenzione Stabili</b>
+          <p>Il classico "tuttofare" professionale. Montaggi, riparazioni generali e gestione tecnica immobili.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tariffe" class="reveal">
+      <div class="titleRow">
+        <div>
+          <h3>Tipologie d'intervento</h3>
+          <p class="sub">Trasparenza prima di tutto.</p>
+        </div>
+      </div>
+      <div class="pricing">
+        <div class="priceCard">
+          <div class="priceTop"><b>PICCOLI LAVORI</b><div class="price">Su Preventivo</div></div>
+          <div class="mini">Per interventi programmati e non urgenti.</div>
+          <ul>
+            <li>Manutenzione ordinaria</li>
+            <li>Sopralluogo gratuito (se in zona)</li>
+            <li>Pianificazione flessibile</li>
+          </ul>
+        </div>
+        <div class="priceCard recommended">
+          <div class="badge">URGENZE</div>
+          <div class="priceTop"><b>CHIAMATA</b><div class="price">a Regia / Ora</div></div>
+          <div class="mini">Quando il problema va risolto subito.</div>
+          <ul>
+            <li>Priorità di intervento</li>
+            <li>Ricerca guasto immediata</li>
+            <li>Messa in sicurezza rapida</li>
+          </ul>
+        </div>
+        <div class="priceCard">
+          <div class="priceTop"><b>POST-ISPEZIONE</b><div class="price">Su Report</div></div>
+          <div class="mini">Hai un report di Mainetti Vision?</div>
+          <ul>
+            <li>Sconto sul preventivo lavori</li>
+            <li>Intervento mirato (risparmi ore)</li>
+            <li>Conosciamo già il problema</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="processo" class="reveal">
+      <div class="titleRow"><div><h3>Come lavoriamo</h3><p class="sub">Dalla chiamata alla soluzione.</p></div></div>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><b>Contatto</b><p>Ci scrivi o chiami descrivendo il guasto o la necessità.</p></div>
+        <div class="step"><div class="num">2</div><b>Analisi</b><p>Valutiamo se serve un sopralluogo o interveniamo subito.</p></div>
+        <div class="step"><div class="num">3</div><b>Intervento</b><p>Eseguiamo il lavoro con attrezzatura professionale.</p></div>
+        <div class="step"><div class="num">4</div><b>Fine</b><p>Verifica funzionamento e pulizia area di lavoro.</p></div>
+      </div>
+    </section>
+
+    <section id="faq" class="reveal">
+      <div class="titleRow"><div><h3>Domande frequenti</h3></div></div>
+      <div class="faq">
+        <details><summary>Quanto costa l'uscita?</summary><p>Dipende dalla zona (Cresciano e dintorni o resto del Ticino) e dall'urgenza. Contattaci per una stima immediata.</p></details>
+        <details><summary>Fate anche ispezioni col drone?</summary><p>Per le ispezioni dettagliate e certificate usiamo il nostro brand gemello <b>Mainetti Vision</b>, poi noi eseguiamo il lavoro fisico.</p></details>
+        <details><summary>Eseguite lavori su impianti fotovoltaici?</summary><p>Sì, ci occupiamo della manutenzione e pulizia. Per l'analisi termica dei pannelli, collaboriamo con Vision.</p></details>
+        <details><summary>Siete assicurati?</summary><p>Assolutamente sì. Mainetti Solution opera con tutte le coperture assicurative necessarie per lavori in cantiere e presso privati.</p></details>
+      </div>
+    </section>
+
+    <section id="contatto" class="reveal">
+      <div class="titleRow"><div><h3>Contattaci</h3><p class="sub">Descrivi il problema, ti richiamiamo noi.</p></div></div>
+      <div class="grid3" style="grid-template-columns: 1.3fr 0.7fr 1fr;">
+        <div class="feature" style="grid-column: span 2;">
+          <b>Richiesta Intervento</b>
+          <p style="margin-bottom:14px;">Compila il form per preparare la mail.</p>
+          <form id="quoteForm">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+              <div><label>Nome e Cognome</label><input required name="name" placeholder="Es. Mario Rossi" /></div>
+              <div><label>Località Intervento</label><input required name="place" placeholder="Es. Cresciano" /></div>
+            </div>
+            <label>Tipo di problema</label>
+            <select name="service">
+              <option>Guasto Elettrico</option>
+              <option>Riparazione Tetto/Gronde</option>
+              <option>Manutenzione Generica</option>
+              <option>Richiesta Urgente (SOS)</option>
+              <option>Altro</option>
+            </select>
+            <label>Descrizione Guasto</label>
+            <textarea name="notes" rows="3" placeholder="Descrivi cosa non funziona..."></textarea>
+            <div style="display:flex; gap:12px; align-items:center; margin-top:16px; flex-wrap:wrap;">
+              <button class="btn primary" type="submit">Genera Richiesta Mail</button>
+            </div>
+          </form>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div class="feature">
+            <b>WhatsApp</b><p style="margin-bottom:10px;">Per urgenze o mandare foto del guasto.</p>
+            <a class="btn primary" href="https://wa.me/41786622588" style="width:100%">Chatta ora</a>
+          </div>
+          <div class="feature">
+            <b>Prima serve un'analisi?</b>
+            <p>Se non sai dov'è il danno (es. infiltrazione invisibile), chiedi prima a:<br><a href="#" style="color:#1fd18a; text-decoration:underline;">@mainettivision</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footgrid">
+        <div>
+          <b style="color:#fff; font-size:15px; letter-spacing:1px;">MAINETTI SOLUTION</b>
+          <div style="margin-top:8px;">Manutenzione Stabili · Elettricità · Riparazioni</div>
+          <div style="margin-top:12px; opacity:0.6;">© <span id="year"></span> Mainetti Solution.<br>Tutti i diritti riservati.</div>
+        </div>
+        <div class="footlinks">
+          <a href="#top">Home</a><a href="#servizi">Servizi</a><a href="#faq">FAQ</a><a href="mailto:info@mainettisolution.ch">Email</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Form handling
+    const form = document.getElementById('quoteForm');
+    function buildMessage(data){
+      return `RICHIESTA INTERVENTO MAINETTI SOLUTION\n\n` +
+             `Nome: ${data.name}\n` +
+             `Località: ${data.place}\n` +
+             `Tipo: ${data.service}\n` +
+             `Dettagli: ${data.notes || "-"}\n\n` +
+             `Inviato dal sito web.`;
+    }
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+      const subject = encodeURIComponent(`Richiesta Intervento - ${data.name}`);
+      const body = encodeURIComponent(buildMessage(data));
+      // Cambia l'email con quella corretta di Solution
+      window.location.href = `mailto:info@mainettisolution.ch?subject=${subject}&body=${body}`;
+    });
+
+    // Reveal animation
+    window.addEventListener('scroll', reveal);
+    function reveal(){
+      var reveals = document.querySelectorAll('.reveal');
+      var windowheight = window.innerHeight;
+      var revealpoint = 100;
+      for(var i = 0; i < reveals.length; i++){
+        var revealtop = reveals[i].getBoundingClientRect().top;
+        if(revealtop < windowheight - revealpoint){ reveals[i].classList.add('active'); }
+      }
+    }
+    reveal();
+  </script>
+</body>
+</html>
